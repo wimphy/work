@@ -1,0 +1,4 @@
+work
+====
+
+exercise for ThinkingInJava
