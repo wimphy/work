@@ -13,8 +13,4 @@ public class ReverseInteger {
         }
         return res;
     }
-
-    public static void main(String[] args) {
-        System.out.println(new ReverseInteger().reverse(1463847412));
-    }
 }
