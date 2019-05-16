@@ -1,0 +1,15 @@
+#!/bin/bash
+
+pushd $HOME/.oic > /dev/null
+source ./oicrc.sh > /dev/null
+popd > /dev/null
+
+if [[ -n "$PCHOME" ]]
+then
+  set -- -B -gs ${PCHOME}/tools/maven/conf/settings.xml -s ${PCHOME}/tools/maven/conf/settings-user.xml "$@"
+  export MAVEN_OPTS='-Xmx1024m -XX:MaxPermSize=512m'
+fi
+
+pwd
+echo exec "$M2_HOME/bin/mvn" "$@"
+exec "$M2_HOME/bin/mvn" "$@"
