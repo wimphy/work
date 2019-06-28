@@ -1,0 +1,16 @@
+modules/adapter/cloud-adapter-plugins/cloud.adapter.ccs/src/main/java/oracle/cloud/connector/bridge/CCSBasic.java 
+modules/adapter/cloud/designtime-framework/cloud-connectivity-services/src/main/java/oracle/cloud/connectivity/ccs/impl/CCSOAuth2.java 
+modules/adapter/cloud/designtime-framework/cloud-connectivity-services/src/main/java/oracle/cloud/connectivity/ccs/json/connector/Connectors.java 
+modules/adapter/cloud-adapter-plugins/cloud.adapter.ccs/src/main/java/oracle/cloud/connector/bridge/CCSApiKey.java 
+modules/adapter/cloud-adapter-plugins/cloud.adapter.ccs/src/main/java/oracle/cloud/connector/bridge/ROPPreConfigured.java 
+modules/adapter/cloud-adapter-plugins/cloud.adapter.ccs/src/main/java/oracle/cloud/connector/designtime/CCSAdapterConnection.java 
+modules/adapter/cloud-adapter-plugins/cloud.adapter.ccs/src/main/java/oracle/cloud/connector/designtime/CCSAdapterMetadataBrowser.java 
+modules/adapter/cloud-adapter-plugins/cloud.adapter.ccs/src/main/java/oracle/cloud/connector/util/CCSAdapterUtil.java 
+modules/adapter/cloud-adapter-plugins/cloud.adapter.ccs/src/test/java/oracle/cloud/connector/designtime/CCSApiKeyTest.java 
+modules/adapter/cloud-adapter-plugins/cloud.adapter.ccs/src/test/java/oracle/cloud/connector/designtime/ResourceOwnerPasswordTest.java 
+modules/adapter/cloud-adapter-plugins/cloud.adapter.ccs/src/test/java/oracle/cloud/connector/util/CCSAdapterUtilTest.java 
+modules/adapter/cloud/designtime-framework/cloud-connectivity-services/src/main/java/oracle/cloud/connectivity/ccs/util/CCSAccountUtils.java 
+modules/adapter/cloud/designtime-framework/cloud-connectivity-services/src/main/java/oracle/cloud/connectivity/ccs/util/CCSConnectorUtils.java 
+modules/adapter/cloud/designtime-framework/cloud-connectivity-services/src/main/java/oracle/cloud/connectivity/ccs/util/CCSUtils.java 
+modules/adapter/cloud/designtime-framework/cloud-connectivity-services/src/main/java/oracle/cloud/connectivity/services/ServiceUtils.java 
+modules/adapter/cloud/designtime-framework/cloud-connectivity-services/src/test/java/oracle/cloud/connectivity/service/CCSAdapterDeploymentTest.java 

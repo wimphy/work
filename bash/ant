@@ -1,0 +1,34 @@
+#!/bin/bash
+
+pushd $HOME/.oic > /dev/null
+source ./oicrc.sh > /dev/null
+popd > /dev/null
+
+ANT_ARGS="-lib ${ADE_VIEW_ROOT}/buildtools/jlib/mail.jar"
+ANT_ARGS=${ANT_ARGS}" -lib ${ADE_VIEW_ROOT}/buildtools/jlib/activation.jar"
+ANT_ARGS=${ANT_ARGS}" -lib ${ADE_VIEW_ROOT}/pcbpel/utl/ant/lib/ant-contrib-1.0b1.jar"
+ANT_ARGS=${ANT_ARGS}" -lib ${ADE_VIEW_ROOT}/pcbpel/patch_lib/ant-logger.jar"
+ANT_ARGS=${ANT_ARGS}" -lib ${ADE_VIEW_ROOT}/pcbpel/qa/as11tests/lib/ftp/"
+ANT_ARGS=${ANT_ARGS}" -lib ${ADE_VIEW_ROOT}/bpm/tools/antlib/maven-ant-tasks-2.1.1.jar"
+ANT_ARGS=${ANT_ARGS}" -lib ${ADE_VIEW_ROOT}/bpm/tools/antlib/ant-apb.jar"
+ANT_ARGS=${ANT_ARGS}" -lib ${ADE_VIEW_ROOT}/bpm/tools/antlib/ant-fuego-tools.jar"
+ANT_ARGS=${ANT_ARGS}" -lib ${ADE_VIEW_ROOT}/bpm/tools/antlib/asm.jar"
+ANT_ARGS=${ANT_ARGS}" -lib ${ADE_VIEW_ROOT}/bpm/tools/antlib/bcel.jar"
+ANT_ARGS=${ANT_ARGS}" -lib ${ADE_VIEW_ROOT}/bpm/tools/antlib/ivy-1.4.1.jar"
+ANT_ARGS=${ANT_ARGS}" -lib ${ADE_VIEW_ROOT}/bpm/tools/antlib/p-unit.jar"
+ANT_ARGS=${ANT_ARGS}" -lib ${ADE_VIEW_ROOT}/bpm/tools/antlib/qdox.jar"
+ANT_ARGS=${ANT_ARGS}" -lib ${M2_HOME}/ant/lib/maven-ant-tasks-2.1.1.jar"
+ANT_ARGS=${ANT_ARGS}" -Dtools.dir=${ADE_VIEW_ROOT}/bpm/tools"
+ANT_ARGS=${ANT_ARGS}" -Dfuego.basedir=${ADE_VIEW_ROOT}/bpm"
+ANT_ARGS=${ANT_ARGS}" -logger com.oracle.ant.logger.PcbpelLogger"
+ANT_ARGS=${ANT_ARGS}" -Dant.build.javac.source=1.6"
+ANT_ARGS=${ANT_ARGS}" -Dant.build.javac.target=1.6"
+if [[ -n "$ADE_VIEW_ROOT" ]]
+then
+  set -- ${ANT_ARGS} "$@"
+  export MAVEN_OPTS='-Xmx1024m -XX:MaxPermSize=512m'
+fi
+
+pwd
+echo exec "$ANT_HOME/bin/ant" "$@"
+exec "$ANT_HOME/bin/ant" "$@"
