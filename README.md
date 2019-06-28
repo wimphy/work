@@ -1,4 +1,4 @@
 work
 ====
 
-exercise for ThinkingInJava
+exercises
