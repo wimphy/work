@@ -16,7 +16,7 @@ Lock
 　　3）Lock不是Java语言内置的，synchronized是Java语言的关键字，因此是内置特性。Lock是一个类，通过这个类可以实现同步访问；
 　　4）Lock必须要用户去手动释放锁(发生异常不会释放锁)，如果没有主动释放锁，就有可能导致出现死锁现象。
 * */
-public class ThreadTest {
+public class ThreadLockTest {
     @Test
     public void TestLock() throws InterruptedException {
         ClassWithLock classWithLock = new ClassWithLock();
