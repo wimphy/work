@@ -21,6 +21,7 @@ public class DemoApplication {
         return "Hello World!";
     }
 
+    //docker-compose up in docker-compose.yml dir
     @RequestMapping("/add")
     String add() {
         String msg = "Hello World!";
