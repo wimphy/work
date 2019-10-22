@@ -44,7 +44,7 @@ public class Server2 extends Server {
             while (iter.hasNext()) {
                 SelectionKey key = iter.next();
                 switch (key.readyOps()) {
-                    case SelectionKey.OP_CONNECT:
+                    case SelectionKey.OP_CONNECT://key.isConnectable()
                         handleConnect(key);
                         break;
                     case SelectionKey.OP_ACCEPT:

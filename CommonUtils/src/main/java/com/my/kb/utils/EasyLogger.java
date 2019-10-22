@@ -5,6 +5,7 @@ import com.my.kb.it.BytesLine;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
+import java.nio.channels.AsynchronousSocketChannel;
 import java.nio.channels.ReadableByteChannel;
 import java.util.logging.Logger;
 
@@ -42,6 +43,13 @@ public class EasyLogger extends Logger {
     }
 
     public static void log(ReadableByteChannel channel) {
+        BytesLine lines = new BytesLine(channel);
+        for (String line : lines) {
+            log(line);
+        }
+    }
+
+    public static void log(AsynchronousSocketChannel channel){
         BytesLine lines = new BytesLine(channel);
         for (String line : lines) {
             log(line);

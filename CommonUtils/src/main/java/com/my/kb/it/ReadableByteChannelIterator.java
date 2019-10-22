@@ -9,6 +9,9 @@ public class ReadableByteChannelIterator extends ByteBufferIterator {
     private ReadableByteChannel channel;
     private boolean more = true;
 
+    public ReadableByteChannelIterator() {
+    }
+
     public ReadableByteChannelIterator(ReadableByteChannel channel) {
         this.channel = channel;
         this.buffer = ByteBuffer.allocate(MAX_LINE_LENGTH);
@@ -18,10 +21,10 @@ public class ReadableByteChannelIterator extends ByteBufferIterator {
     public boolean hasNext() {
         if (index == 0) {
             try {
-                index = channel.read(buffer);
+                index = readToBuffer();
                 more = buffer.position() > 0;
                 buffer.flip();
-            } catch (IOException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
@@ -44,13 +47,17 @@ public class ReadableByteChannelIterator extends ByteBufferIterator {
                     break;
                 }
                 buffer.clear();
-                index = channel.read(buffer);
+                index = readToBuffer();
                 buffer.flip();
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
         return logAndGet();
+    }
+
+    protected int readToBuffer() throws Exception {
+        return channel.read(buffer);
     }
 }
