@@ -1,5 +1,8 @@
 package com.my.kb.aio;
 
+import com.my.kb.net.AbstractClient;
+import com.my.kb.net.IClient;
+
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
@@ -11,12 +14,21 @@ import java.util.concurrent.TimeUnit;
 import static com.my.kb.utils.EasyLogger.log;
 
 
-public class Client {
+public class AsyncClient extends AbstractClient {
+    private AsyncClient(String host, int port) {
+        super(host, port);
+    }
+
     public static void main(String[] args) {
+        new AsyncClient("127.0.0.1", 8080).run();
+    }
+
+    @Override
+    public void run() {
         try {
-            while (true) {
+            while (!stop) {
                 AsynchronousSocketChannel channel = AsynchronousSocketChannel.open();
-                Future<Void> conFuture = channel.connect(new InetSocketAddress("127.0.0.1", 8080));
+                Future<Void> conFuture = channel.connect(new InetSocketAddress(getHost(), getPort()));
                 conFuture.get();
 
                 ByteBuffer buffer = ByteBuffer.wrap("I am async, I am alive".getBytes());
@@ -26,7 +38,7 @@ public class Client {
                 channel.close();
             }
 
-        } catch (IOException | ExecutionException | InterruptedException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
