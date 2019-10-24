@@ -3,11 +3,9 @@ package com.my.kb.aio;
 import com.my.kb.net.AbstractClient;
 import com.my.kb.net.IClient;
 
-import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.AsynchronousSocketChannel;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
@@ -20,7 +18,8 @@ public class AsyncClient extends AbstractClient {
     }
 
     public static void main(String[] args) {
-        new AsyncClient("127.0.0.1", 8080).run();
+        IClient client = new AsyncClient("127.0.0.1", 8080);
+        client.run();
     }
 
     @Override

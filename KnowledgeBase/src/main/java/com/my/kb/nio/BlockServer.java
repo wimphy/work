@@ -1,6 +1,8 @@
 package com.my.kb.nio;
 
 import com.my.kb.io.Utils;
+import com.my.kb.net.AbstractServer;
+import com.my.kb.net.IServer;
 
 import java.io.Closeable;
 import java.io.IOException;
@@ -11,22 +13,17 @@ import java.net.SocketAddress;
 
 import static com.my.kb.utils.EasyLogger.log;
 
-public class Server implements Closeable, Runnable {
-    private int port;
+public class BlockServer extends AbstractServer {
     private ServerSocket server;
 
     protected boolean stop = false;
 
-    public Server(int port) {
-        this.port = port;
-    }
-
-    public int getPort() {
-        return port;
+    public BlockServer(int port) {
+        super(port);
     }
 
     public void start() throws IOException {
-        this.server = new ServerSocket(port);
+        this.server = new ServerSocket(getPort());
         stop = false;
         log("server stated: " + server);
         while (!stop) {
@@ -40,12 +37,6 @@ public class Server implements Closeable, Runnable {
     }
 
     @Override
-    public void close() throws IOException {
-        stop = true;
-        server.close();
-    }
-
-    @Override
     public void run() {
         try {
             start();
@@ -55,11 +46,7 @@ public class Server implements Closeable, Runnable {
     }
 
     public static void main(String[] args) {
-        try {
-            Server ser = new Server(8080);
-            ser.start();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        IServer ser = new BlockServer(8080);
+        ser.run();
     }
 }

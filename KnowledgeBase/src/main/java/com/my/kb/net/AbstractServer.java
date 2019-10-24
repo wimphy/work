@@ -17,4 +17,11 @@ public abstract class AbstractServer implements IServer {
     public void stop() {
         stop = true;
     }
+
+    @Override
+    public String toString() {
+        return "Server{" +
+                "port=" + port +
+                '}';
+    }
 }

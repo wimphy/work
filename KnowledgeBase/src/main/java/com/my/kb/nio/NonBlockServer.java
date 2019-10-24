@@ -13,8 +13,8 @@ import java.util.concurrent.TimeUnit;
 
 import static com.my.kb.utils.EasyLogger.log;
 
-public class Server2 extends Server {
-    public Server2(int port) {
+public class NonBlockServer extends BlockServer {
+    public NonBlockServer(int port) {
         super(port);
     }
 
@@ -94,7 +94,7 @@ public class Server2 extends Server {
     }
 
     public static void main(String[] args) {
-        Server2 ser = new Server2(8080);
+        NonBlockServer ser = new NonBlockServer(8080);
         try {
             ser.start();
         } catch (IOException e) {

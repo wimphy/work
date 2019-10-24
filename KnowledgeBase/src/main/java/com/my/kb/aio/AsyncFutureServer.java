@@ -1,33 +1,37 @@
 package com.my.kb.aio;
 
+import com.my.kb.net.AbstractServer;
+import com.my.kb.net.IServer;
+
 import java.net.InetSocketAddress;
 import java.nio.channels.AsynchronousServerSocketChannel;
 import java.nio.channels.AsynchronousSocketChannel;
 import java.util.concurrent.Future;
-import java.util.concurrent.TimeUnit;
 
 import static com.my.kb.utils.EasyLogger.log;
 
-public class Server {
+public class AsyncFutureServer extends AbstractServer {
+    public AsyncFutureServer(int port) {
+        super(port);
+    }
+
     public static void main(String[] args) {
+        IServer server = new AsyncFutureServer(8080);
+        server.run();
+    }
+
+    @Override
+    public void run() {
         try {
             AsynchronousServerSocketChannel channel = AsynchronousServerSocketChannel.open();
-            channel.bind(new InetSocketAddress(8080));
-            while (true) {
+            channel.bind(new InetSocketAddress(getPort()));
+            while (!stop) {
                 Future<AsynchronousSocketChannel> fu = channel.accept();
                 AsynchronousSocketChannel ch = fu.get();
                 log(ch);
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }
-
-        while (true) {
-            try {
-                TimeUnit.SECONDS.sleep(1);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
         }
     }
 }

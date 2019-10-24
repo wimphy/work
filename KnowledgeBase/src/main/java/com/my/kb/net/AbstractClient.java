@@ -24,4 +24,12 @@ public abstract class AbstractClient implements IClient {
     public void stop() {
         stop = true;
     }
+
+    @Override
+    public String toString() {
+        return "Client{" +
+                "host='" + host + '\'' +
+                ", port=" + port +
+                '}';
+    }
 }

@@ -1,18 +1,37 @@
 package com.my.kb.aio;
 
+import com.my.kb.net.AbstractServer;
+import com.my.kb.net.IServer;
+
 import java.net.InetSocketAddress;
 import java.nio.channels.AsynchronousServerSocketChannel;
 import java.nio.channels.AsynchronousSocketChannel;
 import java.nio.channels.CompletionHandler;
-import java.util.concurrent.TimeUnit;
 
 import static com.my.kb.utils.EasyLogger.log;
 
-public class Server2 {
+public class AsyncHandlerServer extends AbstractServer {
+    public AsyncHandlerServer(int port) {
+        super(port);
+    }
+
     public static void main(String[] args) {
+        IServer server = new AsyncHandlerServer(8080);
+        Thread t = new Thread(server);
+        t.start();
+        try {
+            t.join();
+            System.in.read();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void run() {
         try {
             AsynchronousServerSocketChannel channel = AsynchronousServerSocketChannel.open();
-            channel.bind(new InetSocketAddress(8080));
+            channel.bind(new InetSocketAddress(getPort()));
 
             channel.accept(null, new CompletionHandler<>() {
                 @Override
@@ -27,14 +46,6 @@ public class Server2 {
             });
         } catch (Exception e) {
             e.printStackTrace();
-        }
-
-        while (true) {
-            try {
-                TimeUnit.SECONDS.sleep(1);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
         }
     }
 }

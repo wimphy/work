@@ -1,5 +1,8 @@
 package com.my.kb.nio;
 
+import com.my.kb.net.AbstractClient;
+import com.my.kb.net.IClient;
+
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.ClosedChannelException;
@@ -8,31 +11,13 @@ import java.util.concurrent.TimeUnit;
 
 import static com.my.kb.utils.EasyLogger.log;
 
-public class Client implements Runnable {
-    private String host;
-    private int port;
-
-    private boolean stop = false;
+public class NonBlockClient extends AbstractClient {
     private ByteBuffer buffer = ByteBuffer.allocate(20);
     private SocketChannel channel = null;
 
-    public Client(String host, int port) {
-        this.host = host;
-        this.port = port;
+    public NonBlockClient(String host, int port) {
+        super(host,port);
     }
-
-    public String getHost() {
-        return host;
-    }
-
-    public int getPort() {
-        return port;
-    }
-
-    public void stop() {
-        this.stop = true;
-    }
-
     private void connect() {
         while (!stop) {
             try {
@@ -55,7 +40,7 @@ public class Client implements Runnable {
                     }
                 }
                 log("trying to connect to channel ...");
-                channel.connect(new InetSocketAddress(host, port));
+                channel.connect(new InetSocketAddress(getHost(), getPort()));
                 if (channel.finishConnect()) {
                     log("connected");
                     break;
@@ -103,20 +88,12 @@ public class Client implements Runnable {
     }
 
     @Override
-    public String toString() {
-        return "Client{" +
-                "host='" + host + '\'' +
-                ", port=" + port +
-                '}';
-    }
-
-    @Override
     public void run() {
         ping();
     }
 
     public static void main(String[] args) {
-        Client client = new Client("127.0.0.1", 8080);
-        client.ping();
+        IClient client = new NonBlockClient("127.0.0.1", 8080);
+        client.run();
     }
 }
