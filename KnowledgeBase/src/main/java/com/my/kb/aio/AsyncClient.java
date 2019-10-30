@@ -6,8 +6,7 @@ import com.my.kb.net.IClient;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.AsynchronousSocketChannel;
-import java.util.concurrent.Future;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 
 import static com.my.kb.utils.EasyLogger.log;
 
@@ -22,21 +21,24 @@ public class AsyncClient extends AbstractClient {
         client.run();
     }
 
+    public AsynchronousSocketChannel connect() throws Exception {
+        AsynchronousSocketChannel channel = AsynchronousSocketChannel.open();
+        Future<Void> conFuture = channel.connect(new InetSocketAddress(getHost(), getPort()));
+        conFuture.get();
+        return channel;
+    }
+
     @Override
     public void run() {
         try {
-            while (!stop) {
-                AsynchronousSocketChannel channel = AsynchronousSocketChannel.open();
-                Future<Void> conFuture = channel.connect(new InetSocketAddress(getHost(), getPort()));
-                conFuture.get();
-
-                ByteBuffer buffer = ByteBuffer.wrap("I am async, I am alive".getBytes());
-                Future<Integer> fu = channel.write(buffer);
-                log("feature returned: " + fu.get());
-                TimeUnit.SECONDS.sleep(1);
-                channel.close();
-            }
-
+            AsynchronousSocketChannel channel = connect();
+            ExecutorService executors = Executors.newFixedThreadPool(2);
+            Future<?> fuRead = executors.submit(new AsyncClientRead(channel));
+            Future<?> fuWrite = executors.submit(new AsyncClientWrite(channel));
+            fuRead.get();
+            fuWrite.get();
+            executors.shutdown();
+            executors.awaitTermination(1, TimeUnit.DAYS);
         } catch (Exception e) {
             e.printStackTrace();
         }
