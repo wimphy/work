@@ -7,9 +7,13 @@ import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.nio.channels.AsynchronousSocketChannel;
 import java.nio.channels.ReadableByteChannel;
+import java.util.Arrays;
+import java.util.Random;
 import java.util.logging.Logger;
 
 public class EasyLogger extends Logger {
+    public final static int SAMPLE_ARRAY_COUNT = 10;
+
     protected EasyLogger(String name, String resourceBundleName) {
         super(name, resourceBundleName);
     }
@@ -49,10 +53,26 @@ public class EasyLogger extends Logger {
         }
     }
 
-    public static void log(AsynchronousSocketChannel channel){
+    public static void log(AsynchronousSocketChannel channel) {
         BytesLine lines = new BytesLine(channel);
         for (String line : lines) {
             log(line);
         }
+    }
+
+    public static void log(int[] arr) {
+        if (arr.length <= SAMPLE_ARRAY_COUNT) {
+            log(Arrays.toString(arr));
+            return;
+        }
+        Random r = new Random();
+        int[] samples = new int[SAMPLE_ARRAY_COUNT];
+        int segment = arr.length / SAMPLE_ARRAY_COUNT;
+        for (int i = 0; i < SAMPLE_ARRAY_COUNT; i++) {
+            int pos = r.nextInt(segment);
+            pos = i * segment + pos;
+            samples[i] = arr[pos];
+        }
+        log(Arrays.toString(samples));
     }
 }
