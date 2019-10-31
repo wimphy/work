@@ -4,7 +4,6 @@ import com.my.kb.io.Utils;
 import com.my.kb.net.AbstractServer;
 import com.my.kb.net.IServer;
 
-import java.io.Closeable;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.ServerSocket;

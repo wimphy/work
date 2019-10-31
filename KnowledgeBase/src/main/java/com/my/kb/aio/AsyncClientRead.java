@@ -25,7 +25,7 @@ public class AsyncClientRead implements Runnable {
             while (channel != null && channel.isOpen()) {
                 ByteBuffer buffer = ByteBuffer.allocate(30);
                 Future<Integer> fu = channel.read(buffer);
-                log("feature returned: " + fu.get());
+                log("read: " + fu.get());
                 log(buffer);
                 TimeUnit.SECONDS.sleep(1);
             }

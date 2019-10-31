@@ -7,14 +7,14 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 
 public class FooNettyServer extends AbstractServer {
-    private ChannelHandler handler = null;
+    private ChannelInboundHandlerAdapter adapter = null;
 
     public FooNettyServer(int port) {
         super(port);
     }
 
-    public void setHandler(ChannelHandler handler) {
-        this.handler = handler;
+    public void addAdapter(ChannelInboundHandlerAdapter adapter) {
+        this.adapter = adapter;
     }
 
     @Override
@@ -22,9 +22,8 @@ public class FooNettyServer extends AbstractServer {
         EventLoopGroup parentGrp = new NioEventLoopGroup();
         EventLoopGroup childGrp = new NioEventLoopGroup();
         ServerBootstrap server = new ServerBootstrap();
-        if (handler == null) {
-            handler = new DiscardHandler();
-        }
+        FooHandler handler = new FooHandler();
+        handler.addAdapter(adapter);
         try {
             server.group(parentGrp, childGrp)
                     .channel(NioServerSocketChannel.class)
