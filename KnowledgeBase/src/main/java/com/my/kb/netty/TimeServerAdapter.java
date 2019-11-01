@@ -15,6 +15,11 @@ public class TimeServerAdapter extends ChannelInboundHandlerAdapter {
     }
 
     @Override
+    public boolean isSharable() {
+        return true;
+    }
+
+    @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
         cause.printStackTrace();
         ctx.close();

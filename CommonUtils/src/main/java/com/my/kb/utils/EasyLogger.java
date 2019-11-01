@@ -7,7 +7,9 @@ import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.nio.channels.AsynchronousSocketChannel;
 import java.nio.channels.ReadableByteChannel;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.Random;
 import java.util.logging.Logger;
 
@@ -74,5 +76,19 @@ public class EasyLogger extends Logger {
             samples[i] = arr[pos];
         }
         log(Arrays.toString(samples));
+    }
+
+    public static void logDate(ByteBuffer buffer) {
+        BytesLine lines = new BytesLine(buffer);
+        for (String line : lines) {
+            if (line.length() == 13) {
+                long l = Long.parseLong(line);
+                Date dt = new Date(l);
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                log(simpleDateFormat.format(dt));
+            } else {
+                log(line);
+            }
+        }
     }
 }
