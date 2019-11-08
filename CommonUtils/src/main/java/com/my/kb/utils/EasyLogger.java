@@ -75,7 +75,8 @@ public class EasyLogger extends Logger {
             pos = i * segment + pos;
             samples[i] = arr[pos];
         }
-        log(Arrays.toString(samples));
+        log(String.format("Samples (%d of %d) %s",
+                SAMPLE_ARRAY_COUNT, arr.length, Arrays.toString(samples)));
     }
 
     public static void logDate(ByteBuffer buffer) {

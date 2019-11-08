@@ -107,7 +107,7 @@ public class SortTest {
     @Test
     public void HeapTest() {
         Sort sort = new Heap();
-        int[] arr = {1,9, 4, 20, 23,15,14,99,2};
+        int[] arr = {1, 9, 4, 20, 23, 15, 14, 99, 2};
         log(Arrays.toString(arr));
         sort.sort(arr);
         log(Arrays.toString(arr));
@@ -143,5 +143,31 @@ public class SortTest {
             x[0] = i;
             x[1] = arr[i];
         }
+    }
+
+    @Test
+    public void QuickSortTest() {
+        Sort sort = new Quick();
+        int[] arr = {1, 9, 4, 20, 23, 15, 14, 99, 2};
+        log(Arrays.toString(arr));
+        sort.sort(arr);
+        log(Arrays.toString(arr));
+    }
+
+    @Test
+    public void QuickSortTestBig() {
+        Sort sort = new Quick();
+        int count = 1000000;
+        int[] arr = new int[count];
+        Random r = new Random();
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = r.nextInt(count);
+        }
+        log(arr);
+        long start = System.currentTimeMillis();
+        sort.sort(arr);
+        log("time(ms): " + (System.currentTimeMillis() - start));
+        log(arr); //00:00.142
+        assertInOrder(arr);
     }
 }

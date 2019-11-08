@@ -1,6 +1,6 @@
 package sorting;
 
-public class Heap implements Sort {
+public class Heap extends AbstractSort {
     @Override
     public void sort(int[] arr) {
         int end = arr.length;
@@ -39,11 +39,5 @@ public class Heap implements Sort {
             swap(arr, largest, index);
             buildHeap(arr, largest, len);
         }
-    }
-
-    private void swap(int[] arr, int big, int small) {
-        int tmp = arr[big];
-        arr[big] = arr[small];
-        arr[small] = tmp;
     }
 }
