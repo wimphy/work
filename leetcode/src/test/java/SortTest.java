@@ -28,7 +28,7 @@ public class SortTest {
         }
         log(arr);
         sort.sort(arr);
-        log(arr); //9:26
+        log(arr); //9:26, 2:01
     }
 
     @Test
