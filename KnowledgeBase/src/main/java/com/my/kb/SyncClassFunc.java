@@ -1,6 +1,6 @@
 package com.my.kb;
 
-import static com.my.kb.utils.MyLogger.log;
+import static com.my.kb.utils.EasyLogger.log;
 
 public class SyncClassFunc implements Runnable {
     @Override
