@@ -28,7 +28,7 @@ public class WebServiceConfig extends WsConfigurerAdapter {
         DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
         wsdl11Definition.setPortTypeName("GPort_1");
         wsdl11Definition.setLocationUri("/CNEFundamental");
-        wsdl11Definition.setTargetNamespace("http://www.reuters.webservices.com/CNEFundamental_1_GPort_1");
+        wsdl11Definition.setTargetNamespace("http://www.simon.wang.com/probation/soap");
         wsdl11Definition.setSchema(fixtureDataSchema);
         return wsdl11Definition;
     }

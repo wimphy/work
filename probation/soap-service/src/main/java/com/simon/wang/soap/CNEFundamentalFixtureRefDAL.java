@@ -1,6 +1,5 @@
 package com.simon.wang.soap;
 
-import com.webservices.reuters.cnefundamental_1_fixturedata_1.CNEFundamental1FixtureData1Response;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;

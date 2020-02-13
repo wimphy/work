@@ -1,7 +1,7 @@
 package com.simon.wang.soap;
 
-import com.webservices.reuters.cnefundamental_1_gport_1.StandardRequest;
-import com.webservices.reuters.cnefundamental_1_gport_1.CNEFundamental1GPort1Response;
+import com.wang.simon.probation.soap.SoapTestResponse;
+import com.wang.simon.probation.soap.StandardRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
@@ -15,12 +15,12 @@ public class SvcImpl {
     private @Autowired CNEFundamentalFixtureRefDAL dal;
     private @Autowired CNEFundamentalFixtureDataMapper mapper;
 
-    private final String ns = "http://www.reuters.webservices.com/CNEFundamental_1_GPort_1";
+    private final String ns = "http://www.simon.wang.com/probation/soap";
 
-    @PayloadRoot(namespace = ns, localPart = "CNEFundamental_1_GPort_1_Request")
+    @PayloadRoot(namespace = ns, localPart = "Soap_Test_Request")
     @ResponsePayload
-    public CNEFundamental1GPort1Response GPort_1(@RequestPayload StandardRequest request) {
-        CNEFundamental1GPort1Response retVal;
+    public SoapTestResponse GPort_1(@RequestPayload StandardRequest request) {
+        SoapTestResponse retVal;
 
         try {
             if (!request.isGmon()) {
@@ -31,7 +31,7 @@ public class SvcImpl {
                 // Map the data to the response
                 retVal = mapper.DoMapping(dataFromDB);
             } else {
-                retVal = new CNEFundamental1GPort1Response();
+                retVal = new SoapTestResponse();
             }
             return retVal;
         } catch (Exception e) {
