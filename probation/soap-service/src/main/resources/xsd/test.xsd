@@ -1,0 +1,56 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.simon.wang.com/probation/soap"
+	targetNamespace="http://www.simon.wang.com/probation/soap" elementFormDefault="qualified"
+		   version="v0.1">
+
+	<xs:element name="Soap_Test_Request" type="StandardRequest" />
+	<xs:element name="Soap_Test_Response">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="StandardResponse">
+					<xs:attribute name="timeStamp" type="xs:dateTime" />
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<!-- *************************************************************************************************************************************** -->
+	<xs:complexType name="StandardRequest">
+		<xs:sequence>
+		
+			<!--Gmon is used internally to the web service testing, please set to false as always. -->
+			<xs:element name="Gmon" type="xs:boolean" minOccurs="0"/>
+      <xs:element name="CalcType" >
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="Port Charges"/>
+            <xs:enumeration value="Port Restrictions"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+			<!--Multi rics,IMO are allowed. --><!--IMO is an identifier for an vessel -->
+			<xs:element name="PortRIC" type="xs:string" minOccurs="1"  maxOccurs="unbounded"/>
+      <xs:element name="VesselDWT" type="xs:decimal" minOccurs="0" />
+      <xs:element name="EventType" >
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="Loading"/>
+            <xs:enumeration value="Discharging"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="Cargo" type="xs:string" minOccurs="0"/>
+      <xs:element name="Field" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="StandardResponse">
+		<xs:sequence>
+			<xs:element name="ResponseItem" minOccurs="0">
+				<xs:complexType mixed="true">
+					<xs:sequence>
+            <xs:element name="Result" type="xs:string" minOccurs="1"  maxOccurs="1"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>
