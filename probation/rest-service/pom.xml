@@ -7,6 +7,7 @@
 		<groupId>com.simon.wang</groupId>
 		<artifactId>probation-parent-pom</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
+		<relativePath>../parent-pom</relativePath>
 	</parent>
 
 	<artifactId>rest-service</artifactId>
@@ -29,4 +30,13 @@
 			<artifactId>springfox-swagger-ui</artifactId>
 		</dependency>
 	</dependencies>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
 </project>

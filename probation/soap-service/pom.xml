@@ -7,6 +7,7 @@
         <groupId>com.simon.wang</groupId>
         <artifactId>probation-parent-pom</artifactId>
         <version>0.0.1-SNAPSHOT</version>
+        <relativePath>../parent-pom</relativePath>
     </parent>
 
     <artifactId>soap-service</artifactId>
@@ -28,6 +29,10 @@
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>jaxb2-maven-plugin</artifactId>
