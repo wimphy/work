@@ -10,7 +10,7 @@ import java.util.Collections;
 public enum Logger {
     INSTANCE;
 
-    private String logFile = "target/log.txt";
+    private String logFile = null;
     private SimpleDateFormat SDF = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
 
     public void log(String msg, String... args) {
@@ -37,7 +37,9 @@ public enum Logger {
     }
 
     private void writeToFile(String s) {
-        try (FileWriter writer = new FileWriter(getLogFile(), true)) {
+        String filePath = getLogFile();
+        filePath = filePath == null ? "target/log.txt" : filePath;
+        try (FileWriter writer = new FileWriter(filePath, true)) {
             writer.append(s).append("\r\n");
         } catch (IOException e) {
             e.printStackTrace();
