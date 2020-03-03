@@ -9,6 +9,16 @@
 
   <name>simon-archetype</name>
 
+  <dependencies>
+    <!-- https://mvnrepository.com/artifact/org.apache.maven.archetype/archetype-common -->
+    <dependency>
+      <groupId>org.apache.maven.archetype</groupId>
+      <artifactId>archetype-common</artifactId>
+      <version>3.1.2</version>
+    </dependency>
+
+  </dependencies>
+
   <build>
     <extensions>
       <extension>

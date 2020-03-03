@@ -1,0 +1,26 @@
+<body>
+<canvas id="my_canvas"></canvas>
+</body>
+
+<script>
+    var canvas = null;
+    setup = function () {
+        canvas = document.getElementById("my_canvas");
+        context = canvas.getContext("2d");
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        img = new Image();
+        img.onload = onImageLoad;
+        img.src = "test.png";
+    };
+
+    onImageLoad = function () {
+        console.log("Image ... ");
+        context.drawImage(img, 192, 192);
+    };
+
+    setup();
+
+
+</script>

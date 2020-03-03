@@ -9,7 +9,7 @@
 	<groupId>${groupId}</groupId>
 	<artifactId>${artifactId}</artifactId>
 	<version>${version}</version>
-	<name>${a}</name>
+	<name>${artifactId}</name>
 	<description>CNEFundamental_1</description>
 
 	<properties>
