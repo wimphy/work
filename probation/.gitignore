@@ -1,0 +1,9 @@
+.idea
+*.iml
+*.ipr
+
+.git
+
+target/
+repo/
+FPSProject/

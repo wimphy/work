@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.simon.wang</groupId>
+    <artifactId>probation</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>probation</name>
+    <description>probation</description>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>parent-pom</module>
+        <module>pages-service</module>
+        <module>rest-service</module>
+        <module>soap-service</module>
+        <module>simon-archetype</module>
+        <module>simon-logger</module>
+        <module>simon-tools</module>
+    </modules>
+
+</project>
