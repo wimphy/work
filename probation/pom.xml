@@ -17,6 +17,7 @@
         <module>soap-service</module>
         <module>simon-archetype</module>
         <module>simon-logger</module>
+        <module>simon-tools</module>
     </modules>
 
 </project>
