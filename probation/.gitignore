@@ -1,9 +1,11 @@
 .idea
 *.iml
 *.ipr
-
+*.log
+~$*.doc*
 .git
 
 target/
 repo/
 FPSProject/
+logs/
