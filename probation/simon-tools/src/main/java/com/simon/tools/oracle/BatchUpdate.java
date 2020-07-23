@@ -6,20 +6,20 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.Reader;
+import java.io.*;
+import java.sql.SQLException;
 
 @Service
 public class BatchUpdate {
     private static final Logger logger = LoggerFactory.getLogger(BatchUpdate.class);
     private static final String sqlFormat = "update %s set description=%s where id=%s";
-    private @Autowired JdbcTemplate jdbcTemplate;
+    private @Autowired BatchDao batchDao;
+    private @Value("${db.rows.batch}") int batchSize;
 
     private String generateSQL(CSVRecord record) {
         String tableName = record.get(1);
@@ -27,15 +27,15 @@ public class BatchUpdate {
         //!!, [], {}, (), <>
         //skip special chars
         if (!description.contains("!")) {
-            description = String.format("q\"!%s!\"", description);
+            description = String.format("q'!%s!'", description);
         } else if (!description.contains("[") && !description.contains("]")) {
-            description = String.format("q\"[%s]\"", description);
+            description = String.format("q'[%s]'", description);
         } else if (!description.contains("{") && !description.contains("}")) {
-            description = String.format("q\"{%s}\"", description);
+            description = String.format("q'{%s}'", description);
         } else if (!description.contains("(") && !description.contains(")")) {
-            description = String.format("q\"(%s)\"", description);
+            description = String.format("q'(%s)'", description);
         } else if (!description.contains("<") && !description.contains(">")) {
-            description = String.format("q\"<%s>\"", description);
+            description = String.format("q'<%s>'", description);
         } else {
             logger.error("too many special chars!!!");
             return null;
@@ -44,32 +44,49 @@ public class BatchUpdate {
         return String.format(sqlFormat, tableName, description, id);
     }
 
-    private void writeSQLToFile(String sql) {
-    }
-
     public void doTaskByFile(String fileName) {
-        try (Reader reader = new FileReader(fileName);
-             CSVParser parser = new CSVParser(reader, CSVFormat.EXCEL)) {
-            for (CSVRecord record : parser) {
-                String v1 = record.get(0);
-                if (v1.equals("OBJECTID")) {
-                    logger.info("bypass header");
-                    continue;
+        new Thread(() -> {
+            int rowNumber = 0;
+            String sql = null;
+
+            String slqFileName = fileName.substring(0, fileName.lastIndexOf(".")) + ".sql";
+            try (Reader reader = new FileReader(fileName);
+                 CSVParser parser = new CSVParser(reader, CSVFormat.EXCEL);
+                 FileWriter writer = new FileWriter(slqFileName);
+                 BufferedWriter bufferedWriter = new BufferedWriter(writer)) {
+                bufferedWriter.append("set define off;");
+                bufferedWriter.newLine();
+                for (CSVRecord record : parser) {
+                    String v1 = record.get(0);
+                    if (v1.equals("OBJECTID")) {
+                        logger.info("bypass header");
+                        continue;
+                    }
+
+                    sql = generateSQL(record);
+                    bufferedWriter.append(sql).append(";");
+                    bufferedWriter.newLine();
+                    if (rowNumber > 0 && rowNumber % batchSize == 0) {
+                        bufferedWriter.append("commit;");
+                        bufferedWriter.newLine();
+                    }
+                    batchDao.addTask(sql);
+                    rowNumber++;
                 }
-
-                String sql = generateSQL(record);
-                writeSQLToFile(sql);
-                jdbcTemplate.batchUpdate(sql);
-
+                bufferedWriter.append("commit;");
+                bufferedWriter.newLine();
+                batchDao.stop();
+            } catch (IOException | InterruptedException e) {
+                logger.error(rowNumber + ":" + sql);
+                logger.error("failed to process csv file ", e);
             }
-        } catch (IOException e) {
-            logger.error("failed to read csv file ", e);
-        }
+        }).start();
     }
 
     @PostConstruct
     public void processDescriptions() {
         doTaskByFile("C:\\simon\\refinitiv\\cdb\\tasks\\1684\\Rebranding_descriptions.csv");
+        doTaskByFile("C:\\simon\\refinitiv\\cdb\\tasks\\1684\\rebranding urls.csv");//new thread to add to queue
     }
 
     public static void main(String[] args) {
