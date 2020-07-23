@@ -85,8 +85,8 @@ public class BatchUpdate {
 
     @PostConstruct
     public void processDescriptions() {
-        doTaskByFile("C:\\simon\\refinitiv\\cdb\\tasks\\1684\\Rebranding_descriptions.csv");
-        doTaskByFile("C:\\simon\\refinitiv\\cdb\\tasks\\1684\\rebranding urls.csv");//new thread to add to queue
+        doTaskByFile("C:\\1.csv");
+        doTaskByFile("C:\\2.csv");//new thread to add to queue
     }
 
     public static void main(String[] args) {
