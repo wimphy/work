@@ -57,9 +57,4 @@ public class OracleBeans {
     public ExecutorService getFixedThreadPool() {
         return Executors.newFixedThreadPool(maxPoolSize);
     }
-
-    @Bean("sqlHistory")
-    public SQLHistory getSQLHistory() {
-        return new SQLHistory(fileName);
-    }
 }
