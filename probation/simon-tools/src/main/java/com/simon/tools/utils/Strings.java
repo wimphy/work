@@ -24,4 +24,8 @@ public class Strings {
     public static String formatBatchName(String outFileName, String index) {
         return outFileName.substring(0, outFileName.lastIndexOf(".")) + "." + index + ".sql";
     }
+
+    public static String formatPS1Name(String outFileName) {
+        return outFileName.substring(0, outFileName.lastIndexOf(".")) + ".ps1";
+    }
 }

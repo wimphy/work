@@ -25,6 +25,8 @@ public class ConfigurationService {
     private @Value("${config.db.port}") String port;
     private @Value("${config.db.sid}") String serviceName;
 
+    private @Value("${db.env}") String env;
+
     Properties properties = new Properties();
 
     @PostConstruct
@@ -66,8 +68,10 @@ public class ConfigurationService {
         }
         try (PreparedStatement statement = conn.prepareStatement(lastUpdateSQL)) {
             ResultSet resultSet = statement.executeQuery();
-            resultSet.next();
-            return resultSet.getTimestamp(1);
+            if (resultSet.next()) {
+                return resultSet.getTimestamp(1);
+            }
+            return null;
         }
     }
 
@@ -97,6 +101,6 @@ public class ConfigurationService {
     }
 
     public String get(String key) {
-        return (String) properties.get(key);
+        return (String) properties.get(env + "." + key);
     }
 }

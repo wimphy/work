@@ -25,7 +25,6 @@ public class OracleBeans {
     private @Value("${config.db.port}") String port;
     private @Value("${config.db.sid}") String serviceName;
 
-    private @Value("${db.env}") String env;
     private @Value("${db.init.pool.size}") int initialPoolSize;
     private @Value("${db.min.pool.size}") int minPoolSize;
     private @Value("${db.max.pool.size}") int maxPoolSize;
@@ -35,13 +34,13 @@ public class OracleBeans {
     public PoolDataSource getDataSource(@Autowired ConfigurationService configurationService) {
         PoolDataSource dataSource = PoolDataSourceFactory.getPoolDataSource();
         try {
-            dataSource.setUser(configurationService.get(env + ".db.user"));
-            dataSource.setPassword(configurationService.get(env + ".db.password"));
+            dataSource.setUser(configurationService.get("db.user"));
+            dataSource.setPassword(configurationService.get("db.password"));
             dataSource.setConnectionFactoryClassName("oracle.jdbc.pool.OracleDataSource");
             dataSource.setURL(String.format("jdbc:oracle:thin:@//%s:%s/%s",
-                    configurationService.get(env + ".db.host"),
-                    configurationService.get(env + ".db.port"),
-                    configurationService.get(env + ".db.sid")));
+                    configurationService.get("db.host"),
+                    configurationService.get("db.port"),
+                    configurationService.get("db.sid")));
             dataSource.setFastConnectionFailoverEnabled(true);
             dataSource.setInitialPoolSize(initialPoolSize);
             dataSource.setMinPoolSize(minPoolSize);

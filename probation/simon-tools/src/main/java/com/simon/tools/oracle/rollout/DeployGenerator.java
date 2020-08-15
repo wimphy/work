@@ -1,24 +1,20 @@
 package com.simon.tools.oracle.rollout;
 
 import com.simon.tools.GenWriter;
+import com.simon.tools.services.ConfigurationService;
 import com.simon.tools.services.GenTask;
-import org.springframework.beans.factory.annotation.Value;
+import com.simon.tools.utils.Common;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
 
-public class DeployGenerator extends UpdateGenerator {
-    private static final String sqlFormat = "begin " +
-            "for s in ( " +
-            "select distinct f.curve_id from chart_curve_v f, meta.object_meta om where chart_id = %s " +
-            "              and f.curve_id = om.object_id " +
-            "               and om.object_type_id = 1 " +
-            "               and om.status_id = 5 " +
-            "              ) loop " +
-            "meta.pkg_status.set_status_and_deploy(1,s.curve_id,2,5,null,null,null); " +
-            "end loop; " +
-            "end;";
+import static com.simon.tools.utils.Strings.formatPS1Name;
 
-    private @Value("${db.deploy.batch}") int commitSize;
+public class DeployGenerator extends UpdateGenerator {
+    private static final Logger logger = LoggerFactory.getLogger(DeployGenerator.class);
+    private @Autowired ConfigurationService configurationService;
 
     @Override
     protected void doTask(GenTask genTask) {
@@ -27,18 +23,11 @@ public class DeployGenerator extends UpdateGenerator {
         }
         try {
             GenWriter writer = createNewWriter(genTask);
-            String sql = String.format(sqlFormat, genTask.getId());
+            String sql = configurationService.get("invalidate");
+            sql = String.format(sql, genTask.getId());
+            sql = String.format("curl \"%s\"", sql);
             writer.append(sql);
             writer.newLine();
-            writer.append("/");
-            writer.newLine();
-
-            long rowNumber = genTask.getRowNumber();
-            if (rowNumber > 0 && rowNumber % commitSize == 0) {
-                writer.newLine();
-                writer.append("commit;");
-                writer.newLine();
-            }
             logger.info(genTask + ":" + sql);
             writer.flush();
         } catch (IOException e) {
@@ -47,7 +36,21 @@ public class DeployGenerator extends UpdateGenerator {
     }
 
     protected GenWriter createNewWriter(GenTask genTask) throws IOException {
-        long i = genTask.getRowNumber() / batchSize + 1;
-        return createNewWriter(genTask, String.valueOf(i));
+        String sqlFileName = formatPS1Name(genTask.getFileName());
+        GenWriter writer = writersMap.get(sqlFileName);
+        if (writer == null) {
+            writer = new GenWriter(sqlFileName);
+            writersMap.put(sqlFileName, writer);
+            writer.append("$runDate=$args[0]");
+            writer.newLine();
+        }
+        return writer;
+    }
+
+    @Override
+    protected void cleanup() {
+        for (GenWriter writer : writersMap.values()) {
+            Common.close(writer);
+        }
     }
 }

@@ -5,6 +5,8 @@ import com.simon.tools.services.GenTask;
 import com.simon.tools.utils.Common;
 import com.simon.tools.utils.Strings;
 import oracle.ucp.jdbc.PoolDataSource;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
@@ -17,6 +19,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class RollBackGenerator extends UpdateGenerator {
+    private static final Logger logger = LoggerFactory.getLogger(RollBackGenerator.class);
     //Oracle allows up to 1,000 IN list values in a SQL statement.
     private static final int maxIdCount = 999;
     private static final String sqlFormat = "select id, description from %s where id in (%s)";

@@ -4,6 +4,7 @@
 *.log
 ~$*.doc*
 .git
+cache
 
 target/
 repo/

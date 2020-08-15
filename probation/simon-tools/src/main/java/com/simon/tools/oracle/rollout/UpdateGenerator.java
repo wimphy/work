@@ -18,7 +18,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import static com.simon.tools.utils.Strings.formatBatchName;
 
 public class UpdateGenerator implements IGenerator {
-    protected static final Logger logger = LoggerFactory.getLogger(IGenerator.class);
+    private static final Logger logger = LoggerFactory.getLogger(UpdateGenerator.class);
     private static final String sqlFormat = "update %1$s set description=%2$s where id=%3$s";
     protected ArrayBlockingQueue<GenTask> queue = new ArrayBlockingQueue<>(2000);
     protected ConcurrentHashMap<String, GenWriter> writersMap = new ConcurrentHashMap<>();
@@ -84,8 +84,12 @@ public class UpdateGenerator implements IGenerator {
             return;
         }
         try {
+
             GenWriter writer = createNewWriter(genTask, "0");
             String sql = String.format(sqlFormat, genTask.getTableName(), genTask.getDescription(), genTask.getId());
+//            if(genTask.getDescription().length()>=2997){
+//                return;
+//            }
             writer.append(sql).append(";");
             writer.newLine();
 
