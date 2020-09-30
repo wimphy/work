@@ -7,11 +7,11 @@ import {map, startWith} from 'rxjs/operators';
  * @title Highlight the first autocomplete option
  */
 @Component({
-  selector: 'autocomplete-auto-active-first-option-example',
-  templateUrl: 'autocomplete-auto-active-first-option-example.html',
-  styleUrls: ['autocomplete-auto-active-first-option-example.css'],
+  selector: 'autocomplete-search',
+  templateUrl: 'autocomplete-search.html',
+  styleUrls: ['autocomplete-search.css'],
 })
-export class AutocompleteAutoActiveFirstOptionExample implements OnInit {
+export class AutocompleteSearch implements OnInit {
   myControl = new FormControl();
   options: string[] = ['One', 'Two', 'Three'];
   filteredOptions: Observable<string[]>;

@@ -10,7 +10,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {DemoMaterialModule} from './app/material-module';
 import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
 
-import {AutocompleteAutoActiveFirstOptionExample} from './app/autocomplete-auto-active-first-option-example';
+import {AutocompleteSearch} from './app/autocomplete-search';
 
 // Default MatFormField appearance to 'fill' as that is the new recommended approach and the
 // `legacy` and `standard` appearances are scheduled for deprecation in version 10.
@@ -25,9 +25,9 @@ import {AutocompleteAutoActiveFirstOptionExample} from './app/autocomplete-auto-
     MatNativeDateModule,
     ReactiveFormsModule,
   ],
-  entryComponents: [AutocompleteAutoActiveFirstOptionExample],
-  declarations: [AutocompleteAutoActiveFirstOptionExample],
-  bootstrap: [AutocompleteAutoActiveFirstOptionExample],
+  entryComponents: [AutocompleteSearch],
+  declarations: [AutocompleteSearch],
+  bootstrap: [AutocompleteSearch],
   providers: [
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },
   ]
