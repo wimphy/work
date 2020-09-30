@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
+import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 
 /**
  * @title Highlight the first autocomplete option
@@ -28,8 +29,16 @@ export class AutocompleteSearch implements OnInit {
 
     return this.options.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
   }
-}
 
+  onSelectionChanged(event: MatAutocompleteSelectedEvent) {
+    console.log(event.option.value);
+  }
+
+  onSearchButtonClick(){
+    console.log(document.getElementById('search_id').innerHTML);
+    console.log(111);
+  }
+}
 
 /**  Copyright 2020 Google LLC. All Rights Reserved.
     Use of this source code is governed by an MIT-style license that

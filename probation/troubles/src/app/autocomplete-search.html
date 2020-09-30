@@ -1,20 +1,31 @@
-<form class="example-form">
-  <mat-form-field class="example-full-width">
-    <input type="text"
-           placeholder="Pick one"
-           aria-label="Number"
-           matInput
-           [formControl]="myControl"
-           [matAutocomplete]="auto">
-    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-      <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-        {{option}}
-      </mat-option>
-    </mat-autocomplete>
-  </mat-form-field>
-</form>
+<div>
+  <form class="example-form">
+    <mat-form-field class="example-full-width">
+      <input id="search_id" type="text"
+             placeholder="Pick one"
+             aria-label="Number"
+             matInput
+             [formControl]="myControl"
+             [matAutocomplete]="auto">
+
+      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" (optionSelected)="onSelectionChanged($event)">
+        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+          {{option}}
+        </mat-option>
+      </mat-autocomplete>
+
+      <button mat-button matSuffix mat-stroked-button aria-label="search" (click)="onSearchButtonClick()">
+        <mat-icon>search</mat-icon>
+      </button>
+    </mat-form-field>
+
+  </form>
 
 
+</div>
+<table *ngIf="(filteredOptions | async).length">
+  <tr *ngFor="let employee of filteredOptions | async">{{employee}}</tr>
+</table>
 <!-- Copyright 2020 Google LLC. All Rights Reserved.
     Use of this source code is governed by an MIT-style license that
     can be found in the LICENSE file at http://angular.io/license -->
