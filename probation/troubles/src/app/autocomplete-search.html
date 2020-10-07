@@ -1,26 +1,16 @@
 <div>
-  <form class="example-form">
-    <mat-form-field class="example-full-width">
-      <input id="search_id" type="text"
-             placeholder="Pick one"
-             aria-label="Number"
-             matInput
-             [formControl]="myControl"
-             [matAutocomplete]="auto">
 
-      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" (optionSelected)="onSelectionChanged($event)">
-        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-          {{option}}
-        </mat-option>
-      </mat-autocomplete>
+  <mat-form-field class="example-full-width">
+    <input type="text"
+           placeholder="type to search"
+           matInput
+           [(ngModel)]="searchContent"
+           (keyup.enter)="onSearchButtonClick()">
 
-      <button mat-button matSuffix mat-stroked-button aria-label="search" (click)="onSearchButtonClick()">
-        <mat-icon>search</mat-icon>
-      </button>
-    </mat-form-field>
-
-  </form>
-
+    <button mat-button matSuffix mat-stroked-button aria-label="search" (click)="onSearchButtonClick()">
+      <mat-icon>search</mat-icon>
+    </button>
+  </mat-form-field>
 
 </div>
 <table *ngIf="(filteredOptions | async).length">

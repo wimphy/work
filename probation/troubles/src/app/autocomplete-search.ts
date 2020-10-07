@@ -16,6 +16,7 @@ export class AutocompleteSearch implements OnInit {
   myControl = new FormControl();
   options: string[] = ['One', 'Two', 'Three'];
   filteredOptions: Observable<string[]>;
+  searchContent: string
 
   ngOnInit() {
     this.filteredOptions = this.myControl.valueChanges.pipe(
@@ -30,13 +31,8 @@ export class AutocompleteSearch implements OnInit {
     return this.options.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
   }
 
-  onSelectionChanged(event: MatAutocompleteSelectedEvent) {
-    console.log(event.option.value);
-  }
-
   onSearchButtonClick(){
-    console.log(document.getElementById('search_id').innerHTML);
-    console.log(111);
+    console.log(this.searchContent);
   }
 }
 
