@@ -11,7 +11,9 @@ import {DemoMaterialModule} from './app/material-module';
 import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
 import { RouterModule, Routes } from '@angular/router';
 
-import { ContentSearch} from './app/search';
+import { ContentSearch } from './app/search';
+import { MSAuth } from './ms/auth';
+import { MSMail } from './ms/mail';
 
 const routes: Routes = [
   { path: '**', component: ContentSearch },
@@ -37,6 +39,8 @@ const routes: Routes = [
   bootstrap: [ContentSearch],
   providers: [
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },
+    MSAuth,
+    MSMail,
   ]
 })
 export class AppModule {}
