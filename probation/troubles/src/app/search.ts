@@ -11,11 +11,11 @@ import { MailResponse } from './mail-response';
  * @title Highlight the first autocomplete option
  */
 @Component({
-  selector: 'autocomplete-search',
-  templateUrl: 'autocomplete-search.html',
-  styleUrls: ['autocomplete-search.css'],
+  selector: 'search',
+  templateUrl: 'search.html',
+  styleUrls: ['search.css'],
 })
-export class AutocompleteSearch implements OnInit {
+export class ContentSearch implements OnInit {
   myControl = new FormControl();
   filteredOptions: Observable<string[]>;
   searchContent: string;
