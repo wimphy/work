@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --open --port 443 --host 0.0.0.0 --disableHostCheck true --ssl --ssl-key C:\\simon\\refinitiv\\cdb\\tasks\\troubles\\cer\\localhost.key  --ssl-cert C:\\simon\\refinitiv\\cdb\\tasks\\troubles\\cer\\localhost.crt",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",

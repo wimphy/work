@@ -9,14 +9,21 @@ import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {DemoMaterialModule} from './app/material-module';
 import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
+import { RouterModule, Routes } from '@angular/router';
 
 import {AutocompleteSearch} from './app/autocomplete-search';
+
+const routes: Routes = [
+  { path: '**', component: AutocompleteSearch },
+  //{ path: 'en-us/graph/graph-explorer', redirectTo: '', pathMatch: 'full' },
+  ]
 
 // Default MatFormField appearance to 'fill' as that is the new recommended approach and the
 // `legacy` and `standard` appearances are scheduled for deprecation in version 10.
 // This makes the examples that use MatFormField render the same in StackBlitz as on the docs site.
 @NgModule({
   imports: [
+    RouterModule.forRoot(routes),
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
