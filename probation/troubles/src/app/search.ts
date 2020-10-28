@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 
 import { MSAuth } from '../ms/auth';
 import { MSMail } from '../ms/mail';
+import { MailValue } from '../ms/mail-response';
 
 /**
  * @title Highlight the first autocomplete option
@@ -16,12 +18,12 @@ import { MSMail } from '../ms/mail';
 })
 export class ContentSearch implements OnInit {
   myControl = new FormControl();
-  filteredOptions: Observable<string[]>;
+  filteredOptions: Observable<MailValue[]>;
   searchContent: string;
   loginDisabled: boolean;
   logoutDisabled: boolean;
 
-  constructor(public auth: MSAuth, private mail: MSMail) {
+  constructor(public auth: MSAuth, private mail: MSMail, private sanitizer: DomSanitizer) {
   }
 
   private search(): void {
@@ -32,6 +34,10 @@ export class ContentSearch implements OnInit {
     );
 
     this.mail.search(this.auth.getToken(), this.searchContent, res);
+  }
+
+  x(m: MailValue): SafeHtml {
+    return this.sanitizer.bypassSecurityTrustHtml(m.body.content);
   }
 
   ngOnInit() {

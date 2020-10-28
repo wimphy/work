@@ -34,7 +34,21 @@
 
 </div>
 <table *ngIf="(filteredOptions | async).length">
-  <tr *ngFor="let employee of filteredOptions | async">{{employee}}</tr>
+  <tr *ngFor="let m of filteredOptions | async">
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{m.subject}}
+          </mat-panel-title>
+          <mat-panel-description>
+            {{m.bodyPreview}}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <span [innerHTML]="this.x(m)"></span>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </tr>
 </table>
 
 <div style="display:none">

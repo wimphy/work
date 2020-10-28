@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 
-import { MailResponse } from './mail-response';
+import { MailResponse, MailValue, AttachmentResponse } from './mail-response';
 
 @Injectable()
 export class MSMail {
@@ -10,7 +10,7 @@ export class MSMail {
   constructor(private http: HttpClient) {
   }
 
-  public search(token: string, searchContent: string, res: string[]): void {
+  public search(token: string, searchContent: string, res: MailValue[]): void {
     if (token === undefined || token.length < 1) {
       return;
     }
@@ -22,13 +22,21 @@ export class MSMail {
     }
     const url = 'https://graph.microsoft.com/v1.0/me/messages?' + searchMails;
     const headers = new HttpHeaders({ 'Authorization': 'Bearer ' + token });
-    this.http.get<MailResponse>(url, { headers: headers }).pipe(map(resp => {
-      console.log(resp);
-      resp.value.map(m => {
-        res[i++] = m.subject;
-      });
-
-      return [resp];
-    })).subscribe();
+    this.http.get<MailResponse>(url, { headers: headers }).subscribe(
+      ms => ms.value.map(
+        m => {
+          const url = 'https://graph.microsoft.com/v1.0/me/messages/' + m.id + '/attachments';
+          this.http.get<AttachmentResponse>(url, { headers: headers }).subscribe(
+            as => {
+              as.value.map(
+                a => {
+                  const toBeReplaced = 'cid:' + a.contentId;
+                  console.log(m.subject + ">>>>" + toBeReplaced)
+                  m.body.content = m.body.content.replace(toBeReplaced, 'data:image;base64,' + a.contentBytes);
+                  
+                });
+              res[i++] = m;
+            })
+        }));
   }
 }
