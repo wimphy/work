@@ -5,15 +5,25 @@
     <title>Troubles</title>
   </head>
   <body>
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons&display=block" rel="stylesheet">
-<div class="mat-app-background basic-container">
-  <search>loading</search>
-</div>
-<span class="version-info">Current build: 10.2.3</span>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons&display=block" rel="stylesheet">
+
+    <div class="mat-app-background basic-container">
+      <search>loading</search>
+      <mat-form-field appearance="fill">
+        <mat-label>Cars</mat-label>
+        <select matNativeControl required>
+          <option value="volvo">Volvo</option>
+          <option value="saab">Saab</option>
+          <option value="mercedes">Mercedes</option>
+          <option value="audi">Audi</option>
+        </select>
+      </mat-form-field>
+    </div>
+    <span class="version-info">Current build: 10.2.3</span>
 
 
-<!-- Copyright 2020 Google LLC. All Rights Reserved.
-    Use of this source code is governed by an MIT-style license that
-    can be found in the LICENSE file at http://angular.io/license -->
+    <!-- Copyright 2020 Google LLC. All Rights Reserved.
+      Use of this source code is governed by an MIT-style license that
+      can be found in the LICENSE file at http://angular.io/license -->
   </body>
 </html>

@@ -2,7 +2,47 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
                       https://maven.apache.org/xsd/settings-1.0.0.xsd">
-  <localRepository>C:\simon\work\files\repo</localRepository>
-  <interactiveMode>true</interactiveMode>
+  <localRepository>C:\simon\refinitiv\cdb\apps\repo</localRepository>
   <offline>false</offline>
+  <servers>
+    <server>
+      <username>simon.wang</username>
+      <password>AKCp8hz3Zz4CftSYzrrARcsJDtJVuJGY3kyKTQTNHrGkqHSjt4rqZiVMusoZ5NdZ5FmBJQgMk</password>
+      <id>bams-public</id>
+    </server>
+    <server>
+      <username>simon.wang</username>
+      <password>AKCp8hz3Zz4CftSYzrrARcsJDtJVuJGY3kyKTQTNHrGkqHSjt4rqZiVMusoZ5NdZ5FmBJQgMk</password>
+      <id>bams-snapshot</id>
+    </server>
+    <server>
+      <username>simon.wang</username>
+      <password>AKCp8hz3Zz4CftSYzrrARcsJDtJVuJGY3kyKTQTNHrGkqHSjt4rqZiVMusoZ5NdZ5FmBJQgMk</password>
+      <id>bams-cdf</id>
+    </server>
+    <server>
+      <username>simon.wang</username>
+      <password>AKCp8hz3Zz4CftSYzrrARcsJDtJVuJGY3kyKTQTNHrGkqHSjt4rqZiVMusoZ5NdZ5FmBJQgMk</password>
+      <id>cdf-tr-bams</id>
+    </server>
+    <server>
+      <username>simon.wang</username>
+      <password>AKCp8hz3Zz4CftSYzrrARcsJDtJVuJGY3kyKTQTNHrGkqHSjt4rqZiVMusoZ5NdZ5FmBJQgMk</password>
+      <id>bams-release</id>
+    </server>
+  </servers>
+  <mirrors>
+    <mirror>
+      <id>repo1</id>
+      <mirrorOf>central</mirrorOf>
+      <name>Maven central https repo1</name>
+      <url>https://repo1.maven.org/maven2/</url>
+    </mirror>
+    <mirror>
+      <id>repo2</id>
+      <mirrorOf>central</mirrorOf>
+      <name>Maven central https repo2</name>
+      <url>https://repo2.maven.org/maven2/</url>
+    </mirror>
+  </mirrors>
 </settings>
