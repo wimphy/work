@@ -5,4 +5,60 @@
   <localRepository>C:\simon\work\files\repo</localRepository>
   <interactiveMode>true</interactiveMode>
   <offline>false</offline>
+  <servers>
+    <server>
+      <id>releases</id>
+      <username>mrsvn</username>
+      <password>Pointnvs12</password>
+    </server>
+    <server>
+      <id>snapshots</id>
+      <username>mrsvn</username>
+      <password>Pointnvs12</password>
+    </server>
+    <server>
+      <id>thirdparty</id>
+      <username>mrsvn</username>
+      <password>Pointnvs12</password>
+    </server>
+    <server>
+      <username>simon.wang</username>
+      <password>AKCp8hz3Zz4CftSYzrrARcsJDtJVuJGY3kyKTQTNHrGkqHSjt4rqZiVMusoZ5NdZ5FmBJQgMk</password>
+      <id>bams-public</id>
+    </server>
+    <server>
+      <username>simon.wang</username>
+      <password>AKCp8hz3Zz4CftSYzrrARcsJDtJVuJGY3kyKTQTNHrGkqHSjt4rqZiVMusoZ5NdZ5FmBJQgMk</password>
+      <id>bams-snapshot</id>
+    </server>
+    <server>
+      <username>simon.wang</username>
+      <password>AKCp8hz3Zz4CftSYzrrARcsJDtJVuJGY3kyKTQTNHrGkqHSjt4rqZiVMusoZ5NdZ5FmBJQgMk</password>
+      <id>bams-cdf</id>
+    </server>
+    <server>
+      <username>simon.wang</username>
+      <password>AKCp8hz3Zz4CftSYzrrARcsJDtJVuJGY3kyKTQTNHrGkqHSjt4rqZiVMusoZ5NdZ5FmBJQgMk</password>
+      <id>cdf-tr-bams</id>
+    </server>
+    <server>
+      <username>simon.wang</username>
+      <password>AKCp8hz3Zz4CftSYzrrARcsJDtJVuJGY3kyKTQTNHrGkqHSjt4rqZiVMusoZ5NdZ5FmBJQgMk</password>
+      <id>bams-release</id>
+    </server>
+  </servers>
+  <mirrors>
+    <mirror>
+      <id>repo1</id>
+      <mirrorOf>central</mirrorOf>
+      <name>Maven central https repo1</name>
+      <url>https://repo1.maven.org/maven2/</url>
+    </mirror>
+    <mirror>
+      <id>repo2</id>
+      <mirrorOf>central</mirrorOf>
+      <name>Maven central https repo2</name>
+      <url>https://repo2.maven.org/maven2/</url>
+    </mirror>
+  </mirrors>
 </settings>
