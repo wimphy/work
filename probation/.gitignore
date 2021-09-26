@@ -4,6 +4,10 @@
 
 .git
 
+.vs/
+logs/
+tmp/
 target/
 repo/
 FPSProject/
+node_modules/
