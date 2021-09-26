@@ -12,11 +12,9 @@
 
     <modules>
         <module>CommonUtils</module>
-        <module>demo</module>
         <module>KnowledgeBase</module>
         <module>leetcode</module>
         <module>probation</module>
-        <module>simple-app-sdi</module>
         <module>SpringBootDemo</module>
     </modules>
 
