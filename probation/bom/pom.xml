@@ -7,6 +7,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>probation-bom</name>
     <description>probation-bom</description>
+    <packaging>pom</packaging>
 
     <dependencyManagement>
         <dependencies>

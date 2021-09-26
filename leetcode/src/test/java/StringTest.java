@@ -14,7 +14,7 @@ public class StringTest {
     @Test
     public void testInsertionReplace() throws Exception {
         ReplaceDup rd = new ReplaceDup();
-        String res = rd.insertionReplace("Helllo World");
+        String res = rd.insertionReplace("Hello World");
         log(res);
     }
 }

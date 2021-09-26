@@ -10,7 +10,13 @@
     <description>probation</description>
     <packaging>pom</packaging>
 
+    <properties>
+        <maven.compiler.target>17</maven.compiler.target>
+        <maven.compiler.source>17</maven.compiler.source>
+    </properties>
+
     <modules>
+        <module>bom</module>
         <module>parent-pom</module>
         <module>pages-service</module>
         <module>rest-service</module>
