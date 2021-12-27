@@ -3,7 +3,7 @@ package ora.interview.str;
 import java.util.Set;
 import java.util.TreeSet;
 
-import static com.my.kb.utils.EasyLogger.log;
+import static com.my.kb.utils.SiLogger.log;
 
 public class ReplaceDup {
     public String replace(String str) {

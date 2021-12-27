@@ -11,7 +11,7 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
-import static com.my.kb.utils.EasyLogger.log;
+import static com.my.kb.utils.SiLogger.log;
 
 public class NonBlockServer extends BlockServer {
     public NonBlockServer(int port) {

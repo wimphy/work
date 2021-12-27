@@ -5,7 +5,7 @@ import org.junit.Test;
 
 import java.nio.ByteBuffer;
 
-import static com.my.kb.utils.EasyLogger.log;
+import static com.my.kb.utils.SiLogger.log;
 
 public class ByteBufferTest {
     @Test

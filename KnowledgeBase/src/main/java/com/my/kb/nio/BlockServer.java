@@ -10,7 +10,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketAddress;
 
-import static com.my.kb.utils.EasyLogger.log;
+import static com.my.kb.utils.SiLogger.log;
 
 public class BlockServer extends AbstractServer {
     private ServerSocket server;

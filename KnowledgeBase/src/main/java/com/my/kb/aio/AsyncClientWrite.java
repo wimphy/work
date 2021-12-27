@@ -5,7 +5,7 @@ import java.nio.channels.AsynchronousSocketChannel;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
-import static com.my.kb.utils.EasyLogger.log;
+import static com.my.kb.utils.SiLogger.log;
 
 
 public class AsyncClientWrite implements Runnable {

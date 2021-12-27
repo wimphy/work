@@ -9,7 +9,7 @@ import java.nio.channels.ClosedChannelException;
 import java.nio.channels.SocketChannel;
 import java.util.concurrent.TimeUnit;
 
-import static com.my.kb.utils.EasyLogger.log;
+import static com.my.kb.utils.SiLogger.log;
 
 public class NonBlockClient extends AbstractClient {
     private ByteBuffer buffer = ByteBuffer.allocate(20);

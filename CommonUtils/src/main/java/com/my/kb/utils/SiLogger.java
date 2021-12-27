@@ -1,6 +1,8 @@
 package com.my.kb.utils;
 
 import com.my.kb.it.BytesLine;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -11,19 +13,12 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Random;
-import java.util.logging.Logger;
 
-public class EasyLogger extends Logger {
+public class SiLogger {
     public final static int SAMPLE_ARRAY_COUNT = 10;
-
-    protected EasyLogger(String name, String resourceBundleName) {
-        super(name, resourceBundleName);
-    }
+    private static final Logger logger = LogManager.getLogger(SiLogger.class);
 
     public static void log(String msg) {
-        var stack = Thread.currentThread().getStackTrace();
-        String name = stack[2].getClassName();
-        Logger logger = Logger.getLogger(name);
         logger.info(msg);
     }
 

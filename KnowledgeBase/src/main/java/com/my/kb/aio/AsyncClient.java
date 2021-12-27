@@ -4,11 +4,10 @@ import com.my.kb.net.AbstractClient;
 import com.my.kb.net.IClient;
 
 import java.net.InetSocketAddress;
-import java.nio.ByteBuffer;
 import java.nio.channels.AsynchronousSocketChannel;
 import java.util.concurrent.*;
 
-import static com.my.kb.utils.EasyLogger.log;
+import static com.my.kb.utils.SiLogger.log;
 
 
 public class AsyncClient extends AbstractClient {

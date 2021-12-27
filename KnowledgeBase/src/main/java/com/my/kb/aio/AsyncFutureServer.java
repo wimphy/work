@@ -8,7 +8,7 @@ import java.nio.channels.AsynchronousServerSocketChannel;
 import java.nio.channels.AsynchronousSocketChannel;
 import java.util.concurrent.Future;
 
-import static com.my.kb.utils.EasyLogger.log;
+import static com.my.kb.utils.SiLogger.log;
 
 public class AsyncFutureServer extends AbstractServer {
     public AsyncFutureServer(int port) {

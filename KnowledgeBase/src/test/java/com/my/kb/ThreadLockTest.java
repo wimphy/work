@@ -2,7 +2,7 @@ package com.my.kb;
 
 import org.junit.Test;
 
-import static com.my.kb.utils.EasyLogger.log;
+import static com.my.kb.utils.SiLogger.log;
 
 /*
 synchronized

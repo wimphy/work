@@ -1,6 +1,6 @@
 package com.my.kb.yield;
 
-import static com.my.kb.utils.EasyLogger.log;
+import static com.my.kb.utils.SiLogger.log;
 
 public class NormalThread extends Thread {
     @Override

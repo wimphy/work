@@ -5,7 +5,7 @@ import sorting.*;
 import java.util.Arrays;
 import java.util.Random;
 
-import static com.my.kb.utils.EasyLogger.log;
+import static com.my.kb.utils.SiLogger.log;
 
 public class SortTest {
     @Test
