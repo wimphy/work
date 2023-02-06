@@ -63,7 +63,8 @@ public class SiJson implements Iterable<SiJson> {
             return;
         }
         JSONObject obj = (JSONObject) this.object;
-        if (value instanceof SiJson valueNode) {
+        if (value instanceof SiJson) {
+            SiJson valueNode = (SiJson) value;
             if (valueNode.isObject()) {
                 obj.put(key, valueNode.getJSONObject());
             } else if (valueNode.isArray()) {
@@ -86,7 +87,8 @@ public class SiJson implements Iterable<SiJson> {
             return;
         }
         JSONArray arr = (JSONArray) this.object;
-        if (value instanceof SiJson valueNode) {
+        if (value instanceof SiJson) {
+            SiJson valueNode = (SiJson) value;
             if (valueNode.isObject()) {
                 arr.put(valueNode.getJSONObject());
             }

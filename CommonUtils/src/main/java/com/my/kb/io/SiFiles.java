@@ -2,10 +2,9 @@ package com.my.kb.io;
 
 import org.apache.commons.io.IOUtils;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.nio.charset.Charset;
+import java.util.List;
 
 public class SiFiles {
     public static InputStream getInputStream(String path) {
